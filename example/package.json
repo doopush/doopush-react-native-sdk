@@ -1,0 +1,23 @@
+{
+  "name": "doopush-rn-sdk-example",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "prebuild": "expo prebuild --clean"
+  },
+  "dependencies": {
+    "doopush-react-native-sdk": "workspace:*",
+    "expo": "~50.0.0",
+    "expo-status-bar": "~1.11.0",
+    "react": "18.2.0",
+    "react-native": "0.73.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.2.45",
+    "typescript": "^5.3.0"
+  }
+}

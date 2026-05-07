@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "DooPushExample",
+    "slug": "doopush-example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "platforms": ["ios", "android"],
+    "ios": {
+      "bundleIdentifier": "com.doopush.example",
+      "supportsTablet": false
+    },
+    "android": {
+      "package": "com.doopush.example",
+      "versionCode": 1
+    },
+    "plugins": [
+      [
+        "doopush-react-native-sdk",
+        {
+          "appId": "test_app_id",
+          "apiKey": "test_api_key",
+          "baseURL": "https://test.doopush.com/api/v1",
+          "ios": { "mode": "development" },
+          "android": {
+            "vendors": {
+              "fcm": { "googleServicesFile": "./google-services.json" }
+            }
+          }
+        }
+      ]
+    ]
+  }
+}
