@@ -106,29 +106,21 @@ export default function App() {
 This package is part of the [doopush monorepo](https://github.com/doopush/doopush). To develop:
 
 ```bash
+# 1) Build the SDK
 cd sdk/react-native/DooPushSDK
 pnpm install
 pnpm build
 pnpm test                   # plugin Jest tests
-cd example
-pnpm install
-npx expo prebuild --clean
-npx expo run:android        # Linux/Mac
-npx expo run:ios            # Mac only
+
+# 2) Use the sibling demo app
+cd ../DooPushSDKExample
+npm install
+npm install file:../DooPushSDK --install-links   # copy SDK (avoid symlink so Metro resolves)
+npx expo run:ios            # iOS sim or --device "<device name>"
+npx expo run:android        # Android emulator or --device <id>
 ```
 
-For the example app to find the Android SDK, publish a local copy:
-
-```bash
-cd sdk/android/DooPushSDK
-./gradlew :lib:publishToMavenLocal
-# Then in example app's android/app/build.gradle, temporarily change
-#   implementation 'com.github.doopush:doopush-android-sdk:1.1.+'
-# to
-#   implementation 'com.doopush:android-sdk:1.1.+'
-```
-
-(This dev-coordinate workaround goes away once JitPack publishes v1.1.0.)
+The demo lives at `sdk/react-native/DooPushSDKExample/` (peer of the SDK, not nested), keeping the same shape as the iOS / Android native examples in this monorepo.
 
 ## Coexistence
 
@@ -155,3 +147,12 @@ const { deviceId } = await DooPush.registerWithToken(token, 'fcm');
 ## License
 
 MIT
+
+## CHANGELOG
+
+### v0.1.1
+- **Fix (iOS)**: Forward APNs delegate callbacks via `ExpoAppDelegateSubscriber`. Without this, on Expo apps the device token never reached `DooPushManager.shared.didRegisterForRemoteNotifications(with:)` and `DooPush.register()` hung forever after the user granted permission. Adds `DooPushAppDelegateSubscriber` registered in `expo-module.config.json`.
+- **Repo hygiene**: removed nested `DooPushSDK/example/` workspace; the demo lives at `sdk/react-native/DooPushSDKExample/` (peer of the SDK), aligning with the iOS / Android example layout.
+
+### v0.1.0
+- Initial alpha. `configure`, `register`, `registerWithToken`, message / register listeners. iOS APNs (active mode) + Android FCM only. Config plugin with FCM google-services injection.
