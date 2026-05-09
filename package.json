@@ -1,6 +1,6 @@
 {
   "name": "doopush-react-native-sdk",
-  "version": "0.1.2",
+  "version": "0.5.1",
   "description": "React Native SDK for DooPush push notification service. Built with Expo Modules API; works in Expo (managed/prebuild) and bare RN.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -21,12 +21,22 @@
     "prepare": "pnpm build",
     "prepublishOnly": "pnpm clean && pnpm build && pnpm test"
   },
-  "keywords": ["react-native", "expo", "push-notifications", "doopush", "fcm", "apns"],
+  "keywords": [
+    "react-native",
+    "expo",
+    "push-notifications",
+    "doopush",
+    "fcm",
+    "apns"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/doopush/doopush-react-native-sdk"
   },
   "license": "MIT",
+  "dependencies": {
+    "zod": "^3.22.0"
+  },
   "peerDependencies": {
     "expo": "*",
     "react": "*",
